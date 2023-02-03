@@ -1,35 +1,70 @@
 package br.com.erudio.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.erudio.exception.UnsuportedMathOperationException;
+import br.com.erudio.math.SimpleMath;
+import br.com.erudio.request.converts.NumberConverter;
+
 @RestController
 public class MathController {
 
-	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
-	public Double sum(@PathVariable(value = "numberOne") String numberOne,
-			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
+	@Autowired
+    private SimpleMath math;	
+    
+    @Autowired
+    private NumberConverter converter;
+	
+	@RequestMapping(value="/sum/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double sum(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) {
+		validateInput(numberOne, numberTwo);
+		return math.sum(converter.covertToDouble(numberOne), converter.covertToDouble(numberTwo));		
+	}
+	
+	@RequestMapping(value="/subtraction/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double subtraction(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) {
+		validateInput(numberOne, numberTwo);
+		return math.subtraction(converter.covertToDouble(numberOne), converter.covertToDouble(numberTwo));	
+	}	
+	
+	@RequestMapping(value="/multiplication/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double multiplication(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) {
+		validateInput(numberOne, numberTwo);
+		return math.multiplication(converter.covertToDouble(numberOne), converter.covertToDouble(numberTwo));	
+	}	
+	
+	@RequestMapping(value="/division/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double division(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) {
+		validateInput(numberOne, numberTwo);
+		return math.division(converter.covertToDouble(numberOne), converter.covertToDouble(numberTwo));	
+	}
 
-		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
-			throw new Exception();
+	
+	@RequestMapping(value="/mean/{numberOne}/{numberTwo}", method=RequestMethod.GET)
+	public Double mean(@PathVariable("numberOne") String numberOne, @PathVariable("numberTwo") String numberTwo) {
+		validateInput(numberOne, numberTwo);
+		return math.mean(converter.covertToDouble(numberOne), converter.covertToDouble(numberTwo));		
+	}	
+	
+	@RequestMapping(value="/squareRoot/{number}", method=RequestMethod.GET)
+	public Double squareRoot(@PathVariable("number") String number) {
+		validateInput(number);
+		return math.squareRoot(converter.covertToDouble(number));		
+	}
+	
+	private void validateInput(String number) {
+		if (!converter.isNumeric(number)) {
+			throw new UnsuportedMathOperationException("Please set a numeric value!");
 		}
-		Double sum = convertToDouble(numberOne) + convertToDouble(numberTwo);
-		return sum;
+	}	
+	
+	private void validateInput(String numberOne, String numberTwo) {
+		if (!converter.isNumeric(numberOne) || !converter.isNumeric(numberTwo)) {
+			throw new UnsuportedMathOperationException("Please set a numeric value!");
+		}
 	}
-
-	private Double convertToDouble(String strNumber) {
-		if(strNumber == null) return 0D;
-		String number = strNumber.replaceAll(",", ".");	
-		if(isNumeric(number)) return Double.parseDouble(number);
-		return 0D;
-	}
-
-	private boolean isNumeric(String strNumber) {
-		if(strNumber == null) return false;
-		String number = strNumber.replaceAll(",", ".");		
-		return number.matches("[-+]?[0-9]*\\.?[0-9]+");
-	}
-
 }
