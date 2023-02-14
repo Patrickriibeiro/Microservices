@@ -38,3 +38,6 @@ greeting-service/.mvn/wrapper/maven-wrapper.jar
 greeting-service/.mvn/wrapper/maven-wrapper.properties
 greeting-service/mvnw
 config-server/mvnw
+*.jar
+*.properties
+cambio-service/mvnw
