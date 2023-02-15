@@ -1,4 +1,4 @@
-package io.github.PatrickRiibeiro.proxy;
+package io.github.PatrickRiibeiro.bookservice.proxy;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import io.github.PatrickRiibeiro.bookservice.model.Book;
+import io.github.PatrickRiibeiro.bookservice.proxy.CambioProxy;
 import io.github.PatrickRiibeiro.bookservice.repository.BookRepository;
 import io.github.PatrickRiibeiro.bookservice.response.Cambio;
-import io.github.PatrickRiibeiro.proxy.CambioProxy;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.var;
 
