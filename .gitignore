@@ -41,3 +41,4 @@ config-server/mvnw
 *.jar
 *.properties
 cambio-service/mvnw
+book-service/mvnw
