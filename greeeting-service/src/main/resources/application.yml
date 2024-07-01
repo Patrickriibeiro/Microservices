@@ -1,12 +1,17 @@
+server:
+  port: 8080
 spring:
   application:
     name: greeting-service
+  config:
+    import: optional:http://localhost:8888/  
+  profiles:
+    active:
+    - qa  
 management:
   endpoints:
     web:
       exposure:
         include:
         - '*'
-greeting-service  :
-  greeting: "Olá"
-  default-value: "Mundo"    
+  
