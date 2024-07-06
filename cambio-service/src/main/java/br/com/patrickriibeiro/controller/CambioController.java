@@ -30,7 +30,7 @@ public class CambioController {
 		Cambio cambio = repository.findByFromAndTo(from, to)
 				.orElseThrow( () -> new RuntimeException("Currency Unsupported"));
 		cambio.setEnvironment(environment.getProperty("local.server.port"));
-		cambio.setConversionFactor(cambio.getConversionFactor()
+		cambio.setConvertedValue(cambio.getConversionFactor()
 				.multiply(amount)
 				.setScale(2, RoundingMode.CEILING));
 		return cambio;
