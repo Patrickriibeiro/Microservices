@@ -1,5 +1,5 @@
 # microservices
-Projeto de estudo(Curso erudio) : Microservices utilizando: Feign, Eureka, Spring Cloud LoadBalancer, Resilience4j, Swagger OpenAPI, Docker, Zipkin e Sleuth.
+Projeto de estudo microservices : Microservices utilizando: Feign, Eureka, Spring Cloud LoadBalancer, Resilience4j, Swagger OpenAPI, Docker, Zipkin e Sleuth.
 
 
 Flyway : O Flyway é uma ferramenta poderosa para gerenciamento de versões de banco de dados e é totalmente compatível com o Spring Boot e MySQL.
@@ -16,3 +16,8 @@ por
    <groupId>org.flywaydb</groupId>
    <artifactId>flyway-mysql</artifactId>
 </dependency>
+
+
+
+Caso alguém tenha interesse : 
+Curso Erudio : https://www.udemy.com/course/microservices-do-0-a-gcp-com-spring-boot-kubernetes-e-docker/learn/lecture/26012946#overview
