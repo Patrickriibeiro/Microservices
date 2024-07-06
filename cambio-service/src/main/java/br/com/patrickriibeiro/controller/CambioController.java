@@ -1,8 +1,7 @@
 package br.com.patrickriibeiro.controller;
 
 import java.math.BigDecimal;
-
-import javax.management.RuntimeErrorException;
+import java.math.RoundingMode;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -28,11 +27,13 @@ public class CambioController {
 	@GetMapping(value = "/{amount}/{from}/{to}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Cambio getCambio(@PathVariable("amount") BigDecimal amount, @PathVariable("from") String from,
 			@PathVariable("to") String to) {
-		
-		var Cambio = repository.findByFromAndTo(from, to);
-		if(Cambio == null) throw new RuntimeException("Currency Unsupported");
-		
-		return new Cambio(1L, from, to, BigDecimal.ONE, BigDecimal.ONE, environment.getProperty("local.server.port"));
+		Cambio cambio = repository.findByFromAndTo(from, to)
+				.orElseThrow( () -> new RuntimeException("Currency Unsupported"));
+		cambio.setEnvironment(environment.getProperty("local.server.port"));
+		cambio.setConversionFactor(cambio.getConversionFactor()
+				.multiply(amount)
+				.setScale(2, RoundingMode.CEILING));
+		return cambio;
 	}
 
 }
