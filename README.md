@@ -40,7 +40,7 @@ Suporte a Hystrix: Integrado com Hystrix para fornecer tolerância a falhas e ci
 
 
 
-Eureka service-registry : Eureka é um serviço de registro de serviços desenvolvido pela Netflix como parte do seu conjunto de ferramentas de infraestrutura. Ele é um componente essencial para arquiteturas de microsserviços, permitindo que serviços descubram e se comuniquem uns com os outros. Aqui está um detalhamento sobre o Eureka:
+Eureka discovery/registry : Eureka é um serviço de registro de serviços desenvolvido pela Netflix como parte do seu conjunto de ferramentas de infraestrutura. Ele é um componente essencial para arquiteturas de microsserviços, permitindo que serviços descubram e se comuniquem uns com os outros. Aqui está um detalhamento sobre o Eureka:
 
 Principais Características do Eureka
 Registro de Serviços: Serviços (ou instâncias de aplicativos) se registram com o servidor Eureka, fornecendo suas informações de localização (como URLs) para que outros serviços possam encontrá-los.
