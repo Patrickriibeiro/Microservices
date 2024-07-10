@@ -19,5 +19,17 @@ por
 
 
 
+Feign : O Feign é uma biblioteca Java criada pela Netflix que facilita a criação de clientes HTTP para se comunicar com APIs REST. Ele oferece uma maneira simples e declarativa de definir as interações HTTP, abstraindo a complexidade de lidar com chamadas HTTP diretamente. Aqui estão alguns dos principais conceitos e características do Feign:
+
+Principais Características do Feign
+Declarativo: Com Feign, você define interfaces e as anota com informações sobre as requisições HTTP, como endpoints e métodos HTTP (GET, POST, etc.).
+Integração Simples com Spring: Feign é amplamente usado em projetos Spring Boot, especialmente em arquiteturas de microsserviços. Com a anotação @EnableFeignClients, você pode habilitar facilmente o Feign no seu projeto.
+Reduz a Verbosidade: Em vez de escrever código boilerplate para realizar chamadas HTTP, você simplesmente define métodos nas interfaces e Feign cuida do resto.
+Configuração de Timeout e Retry: Você pode configurar facilmente comportamentos como tempo de espera (timeout) e tentativas (retry) diretamente nas interfaces ou em configurações globais.
+Interceptors e Customização: Feign permite a adição de interceptors para adicionar cabeçalhos personalizados, autenticação, logging, etc.
+Suporte a Hystrix: Integrado com Hystrix para fornecer tolerância a falhas e circuit breakers.
+
+
+
 Caso alguém tenha interesse : 
 Curso Erudio : https://www.udemy.com/course/microservices-do-0-a-gcp-com-spring-boot-kubernetes-e-docker/learn/lecture/26012946#overview
