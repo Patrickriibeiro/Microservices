@@ -31,6 +31,11 @@ Configuração de Timeout e Retry: Você pode configurar facilmente comportament
 Interceptors e Customização: Feign permite a adição de interceptors para adicionar cabeçalhos personalizados, autenticação, logging, etc.
 Suporte a Hystrix: Integrado com Hystrix para fornecer tolerância a falhas e circuit breakers.
 
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+
 
 
 Caso alguém tenha interesse : 
