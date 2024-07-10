@@ -6,6 +6,8 @@ Flyway : O Flyway é uma ferramenta poderosa para gerenciamento de versões de b
 
 Obs: FlyWay decidiu separar as implementações. Por isso hoje precisamos adicionar o FlyWay core e uma nova dependência específica para trabalhar com o MySQL ou o MariaDB se for o caso.
 
+os V1, V2, V3 são as ordens que o flyway irá executar os scripts, atenção nessa questão.
+
 <dependency>
    <groupId>org.flywaydb</groupId>
    <artifactId>flyway-core</artifactId>
