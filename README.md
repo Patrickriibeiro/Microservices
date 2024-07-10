@@ -21,6 +21,8 @@ por
 
 
 
+
+
 Feign : O Feign é uma biblioteca Java criada pela Netflix que facilita a criação de clientes HTTP para se comunicar com APIs REST. Ele oferece uma maneira simples e declarativa de definir as interações HTTP, abstraindo a complexidade de lidar com chamadas HTTP diretamente. Aqui estão alguns dos principais conceitos e características do Feign:
 
 Principais Características do Feign
@@ -35,6 +37,17 @@ Suporte a Hystrix: Integrado com Hystrix para fornecer tolerância a falhas e ci
 	<groupId>org.springframework.cloud</groupId>
 	<artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
+
+
+
+Eureka service-registry : Eureka é um serviço de registro de serviços desenvolvido pela Netflix como parte do seu conjunto de ferramentas de infraestrutura. Ele é um componente essencial para arquiteturas de microsserviços, permitindo que serviços descubram e se comuniquem uns com os outros. Aqui está um detalhamento sobre o Eureka:
+
+Principais Características do Eureka
+Registro de Serviços: Serviços (ou instâncias de aplicativos) se registram com o servidor Eureka, fornecendo suas informações de localização (como URLs) para que outros serviços possam encontrá-los.
+Descoberta de Serviços: Serviços clientes podem consultar o servidor Eureka para obter a localização de outros serviços registrados. Isso permite a comunicação dinâmica e a escalabilidade entre microsserviços.
+Alta Disponibilidade: Eureka suporta configuração em cluster para alta disponibilidade. Vários servidores Eureka podem replicar informações entre si para garantir que o registro de serviços esteja sempre disponível.
+Auto-Regeneração: Serviços que se registram no Eureka precisam enviar batimentos cardíacos (heartbeats) periodicamente. Se o Eureka não receber um heartbeat dentro de um período específico, ele considera que o serviço está offline e remove-o do registro.
+Integração com Spring Cloud: Spring Cloud Netflix facilita a integração do Eureka em aplicações Spring Boot, tornando o processo de registro e descoberta de serviços mais simples.
 
 
 
