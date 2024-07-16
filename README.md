@@ -50,6 +50,37 @@ Auto-Regeneração: Serviços que se registram no Eureka precisam enviar batimen
 Integração com Spring Cloud: Spring Cloud Netflix facilita a integração do Eureka em aplicações Spring Boot, tornando o processo de registro e descoberta de serviços mais simples.
 
 
+spring cloud routing (gateway) :  O Spring Cloud Gateway é um projeto da Spring que fornece uma solução de roteamento API baseada em microserviços. Ele é uma alternativa moderna ao Zuul, com foco em flexibilidade e desempenho. Abaixo, vou detalhar os principais conceitos e funcionalidades do Spring Cloud Gateway:
+
+Conceitos Principais
+Route (Rota):
+
+Uma rota é o conceito central no Spring Cloud Gateway. Cada rota é composta por um identificador, um predicado e uma lista de filtros.
+O predicado é uma condição que, se satisfeita, ativa a rota (por exemplo, correspondência de caminho de URL).
+Os filtros podem modificar a solicitação ou resposta antes ou depois de rotear para o destino.
+Predicate (Predicado):
+
+Predicados são condições que verificam se uma rota deve ser aplicada a uma solicitação. Exemplos incluem correspondência de caminho de URL, cabeçalhos HTTP, parâmetros de consulta, etc.
+Filter (Filtro):
+
+Filtros permitem a modificação de solicitações e respostas. Eles podem ser de pré-rota (modificando a solicitação antes de enviá-la ao destino) ou de pós-rota (modificando a resposta antes de enviá-la de volta ao cliente).
+Funcionalidades
+Roteamento Dinâmico:
+
+O Spring Cloud Gateway permite definir rotas dinamicamente, facilitando a configuração e a manutenção dos caminhos de roteamento.
+Resiliência:
+
+Integrado com circuit breakers (como o Resilience4j), permitindo a implementação de padrões de resiliência.
+Escalabilidade e Performance:
+
+Baseado no Netty, um framework de rede assíncrono de alto desempenho, o que o torna altamente escalável e eficiente em termos de performance.
+Segurança:
+
+Integração com OAuth2, JWT e outros padrões de segurança, facilitando a autenticação e autorização.
+Facilidade de Configuração:
+
+Rotas, predicados e filtros podem ser configurados de forma declarativa usando arquivos de configuração YAML ou programaticamente através de Java.
+
 
 Caso alguém tenha interesse : 
 Curso Erudio : https://www.udemy.com/course/microservices-do-0-a-gcp-com-spring-boot-kubernetes-e-docker/learn/lecture/26012946#overview
