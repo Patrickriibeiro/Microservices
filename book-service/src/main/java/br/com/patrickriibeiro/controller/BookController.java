@@ -27,8 +27,9 @@ public class BookController {
 	@GetMapping(value = "/{id}/{currency}")
 	public Book findBook(@PathVariable Long id, @PathVariable String currency) {
 		var book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Book not found"));
-		book.setEnvironment(environment.getProperty("local.server.port"));
-		book.setPrice(proxy.getCambio(book.getPrice(), "USD", currency).getConvertedValue());
+		var cambio = proxy.getCambio(book.getPrice(), "USD", currency);
+		book.setEnvironment("Book port : " + environment.getProperty("local.server.port" + "Cambio Port : " + cambio.getEnvironment()));
+		book.setPrice(cambio.getConvertedValue());
 		return book;
 	}
 
