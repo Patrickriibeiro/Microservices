@@ -81,6 +81,7 @@ Facilidade de Configuração:
 
 Rotas, predicados e filtros podem ser configurados de forma declarativa usando arquivos de configuração YAML ou programaticamente através de Java.
 
+O Circuit Breaker e as bibliotecas do Resilience4j são ferramentas poderosas para construir sistemas resilientes e estáveis, especialmente em ambientes de microserviços e sistemas distribuídos. Utilizar esses padrões ajuda a gerenciar falhas, controlar a taxa de solicitações e isolar componentes, aumentando a robustez e a capacidade de recuperação das aplicações.
 
 Caso alguém tenha interesse : 
 Curso Erudio : https://www.udemy.com/course/microservices-do-0-a-gcp-com-spring-boot-kubernetes-e-docker/learn/lecture/26012946#overview
