@@ -43,3 +43,9 @@ spring:
     user: root
     password: admin123
     locations: classpath:db/migration
+#springdoc:
+#  api-docs:
+#    path: book-service/v3/api-docs
+#  swagger-ui:
+#    config-url: /cambio-service/v3/api-docs/swagger-config
+#    url: /cambio-service/v3/api-docs	

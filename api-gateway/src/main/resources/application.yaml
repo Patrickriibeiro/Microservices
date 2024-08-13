@@ -17,11 +17,28 @@ spring:
       - id: cambio-service
         uri:  lb://cambio-service
         predicates:
-        - Path=/cambio-service/**
+          - Path=/cambio-service/**
+        filters:
+          - RewritePath=/cambio-service/(?<path>.*), /$\{path}				
       - id: book-service
         uri:  lb://book-service
         predicates:
-        - Path=/book-service/**
+          - Path=/book-service/**
+        filters:
+          - RewritePath=/book-service/(?<path>.*), /$\{path}					
+      - id: openapi
+        uri: lb://api-gateway 
+        predicates:
+         - Path=:/v3/api-docs/**
+        filters:
+        - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+springdoc:
+  swagger-ui:
+    urls:
+      - name: book-service
+        url: /v3/api-docs/book-service
+      - name: cambio-service
+        url: /v3/api-docs/cambio-service
           
 
     

@@ -23,3 +23,10 @@ spring:
     user: root
     password: admin123
     locations: classpath:db/migration
+#springdoc:
+#  api-docs:
+#    path: cambio-service/v3/api-docs
+#  show-actuator: true
+#  swagger-ui:
+#    config-url: /cambio-service/v3/api-docs/swagger-config 
+#    url:  /cambio-service/v3/api-doc  
