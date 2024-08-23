@@ -1,7 +1,3 @@
-Aqui está uma versão aprimorada da sua documentação de README para o projeto de microservices. Vou incluir uma formatação melhorada e a estrutura de informações para facilitar a leitura e a compreensão. Além disso, vou adicionar algumas sugestões para personalização com CSS, caso você decida usar um gerador de documentação como o GitHub Pages.
-
----
-
 ## Microservices com Spring Boot
 
 Este projeto de estudo explora a implementação de microserviços utilizando várias tecnologias e ferramentas do ecossistema Spring e outras integrações. O foco é criar uma arquitetura resiliente, escalável e fácil de gerenciar.
