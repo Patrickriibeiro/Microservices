@@ -177,8 +177,6 @@ docker run -v /host/path:/container/path -p 8080:8080 meu-aplicativo-java
 Este Dockerfile requer acesso à internet para baixar dependências durante o build.
 ```
 
-Essas seções ajudam a garantir que os usuários entendam como construir e executar a imagem Docker, quais configurações são necessárias e como utilizar o contêiner resultante.
-
 ### Observação 
 arquivo Dockerfile deve sempre começar com letra maiúscula. Além disso, todos os arquivos e subdiretórios presentes no mesmo diretório do Dockerfile serão incluídos na construção da imagem Docker. Certifique-se de que apenas os arquivos necessários para a aplicação estejam neste diretório para evitar incluir arquivos desnecessários na imagem final.
 
