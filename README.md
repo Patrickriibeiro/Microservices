@@ -180,6 +180,16 @@ Este Dockerfile requer acesso à internet para baixar dependências durante o bu
 ### Observação 
 arquivo Dockerfile deve sempre começar com letra maiúscula. Além disso, todos os arquivos e subdiretórios presentes no mesmo diretório do Dockerfile serão incluídos na construção da imagem Docker. Certifique-se de que apenas os arquivos necessários para a aplicação estejam neste diretório para evitar incluir arquivos desnecessários na imagem final.
 
+O comando `mvn clean package -DskipTests` é utilizado com o Maven, uma ferramenta de automação de build amplamente usada em projetos Java :
+
+1. **`mvn`**: Este é o comando para invocar o Maven. Ele é o ponto de partida para qualquer operação do Maven.
+
+2. **`clean`**: Este é um dos "goals" (metas) ou comandos básicos do Maven. O `clean` remove todos os arquivos gerados pelo build anterior do diretório `target`. Essencialmente, ele limpa o ambiente para garantir que você esteja começando com uma configuração limpa e sem conflitos ou arquivos de build anteriores.
+
+3. **`package`**: Este é outro "goal" do Maven. O `package` compila o código-fonte do projeto, executa testes (por padrão) e empacota o código compilado em um formato distribuível, como um JAR (Java ARchive) ou WAR (Web Application Archive), dependendo da configuração do projeto. O arquivo resultante é colocado no diretório `target`.
+
+4. **`-DskipTests`**: Este é um parâmetro de linha de comando que define uma propriedade do sistema no Maven. `-D` é usado para definir propriedades, e `skipTests` é o nome da propriedade. Quando você usa `-DskipTests`, está dizendo ao Maven para não executar os testes durante o processo de build. É importante notar que, com `-DskipTests`, os testes não serão executados, mas ainda serão compilados. 
+
 ### Recursos Adicionais
 
 - **Curso Recomendado:** [Microservices do 0 a GCP com Spring Boot, Kubernetes e Docker](https://www.udemy.com/course/microservices-do-0-a-gcp-com-spring-boot-kubernetes-e-docker/learn/lecture/26012946#overview)
