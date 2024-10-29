@@ -171,6 +171,36 @@ Para persistência de dados, monte um volume local:
 docker run -v /host/path:/container/path -p 8080:8080 meu-aplicativo-java
 ```
 
+Para "tagear" uma imagem Docker como `latest` no Docker Registry, você pode usar o comando `docker tag`. Esse comando permite que você crie um alias (`latest`) para uma imagem que já tenha sido criada. Vou descrever o processo:
+
+### Passos para "tagear" uma imagem como `latest`
+
+1. Primeiro, construa ou tenha a imagem que deseja "tagear":
+   ```bash
+   docker build -t meu-repositorio/minha-imagem:v1 .
+   ```
+
+2. Em seguida, crie uma tag `latest` para a mesma imagem:
+   ```bash
+   docker tag meu-repositorio/minha-imagem:v1 meu-repositorio/minha-imagem:latest
+   ```
+
+3. Agora, faça o push para o registry (ex.: Docker Hub, AWS ECR, etc.):
+   ```bash
+   docker push meu-repositorio/minha-imagem:latest
+   ```
+
+### Resumo
+O comando completo seria:
+
+```bash
+docker build -t meu-repositorio/minha-imagem:v1 .
+docker tag meu-repositorio/minha-imagem:v1 meu-repositorio/minha-imagem:latest
+docker push meu-repositorio/minha-imagem:latest
+```
+
+Essa prática de "tagear" a última versão como `latest` é útil para manter o ambiente atualizado com a versão mais recente.
+
 ### Dependências Externas
 
 ```bash
