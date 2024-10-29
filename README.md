@@ -243,6 +243,52 @@ Você pode adicionar opções para refinar a busca:
 
 Esses filtros ajudam a encontrar imagens confiáveis e amplamente usadas.
 
+Para remover uma imagem Docker local, você pode usar o comando `docker rmi`. Esse comando aceita o ID ou o nome da imagem como argumento.
+
+### Comando Básico
+
+```bash
+docker rmi nome-da-imagem
+```
+
+ou, se preferir, usando o ID da imagem:
+
+```bash
+docker rmi id-da-imagem
+```
+
+### Exemplo Prático
+
+1. Primeiro, liste as imagens para identificar o nome ou ID da imagem que deseja remover:
+
+   ```bash
+   docker images
+   ```
+
+2. Em seguida, remova a imagem:
+
+   ```bash
+   docker rmi mysql:latest
+   ```
+
+### Forçar a Remoção
+
+Se a imagem estiver sendo usada por um ou mais containers, você pode adicionar a opção `-f` (forçar):
+
+```bash
+docker rmi -f nome-da-imagem
+```
+
+### Remover Todas as Imagens
+
+Para remover todas as imagens de uma vez:
+
+```bash
+docker rmi $(docker images -q)
+```
+
+Isso irá limpar todas as imagens, liberando espaço em disco.
+
 ### Dependências Externas
 
 ```bash
