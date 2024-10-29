@@ -201,6 +201,48 @@ docker push meu-repositorio/minha-imagem:latest
 
 Essa prática de "tagear" a última versão como `latest` é útil para manter o ambiente atualizado com a versão mais recente.
 
+Para buscar imagens no Docker Hub diretamente pela linha de comando, você pode usar o comando `docker search`. Esse comando permite que você procure por imagens disponíveis no Docker Registry (Docker Hub) com base em uma palavra-chave.
+
+### Exemplo de Uso
+
+```bash
+docker search nome-da-imagem
+```
+
+Por exemplo, para buscar imagens relacionadas ao MySQL:
+
+```bash
+docker search mysql
+```
+
+### Explicação dos Campos Retornados
+
+O comando `docker search` exibe uma lista de imagens com as seguintes informações:
+
+- **NAME**: Nome da imagem.
+- **DESCRIPTION**: Descrição breve sobre o que a imagem faz.
+- **STARS**: Número de "estrelas" ou avaliações positivas que a imagem recebeu.
+- **OFFICIAL**: Indica se a imagem é oficial (geralmente feita e mantida pela própria empresa que fornece o software, como MySQL, Redis, etc.).
+- **AUTOMATED**: Mostra se a imagem é gerada automaticamente a partir de um repositório (como o GitHub) com base em arquivos de configuração.
+
+### Filtros Úteis
+
+Você pode adicionar opções para refinar a busca:
+
+- `--filter=stars=[número]`: Mostra apenas imagens com um certo número de estrelas (avaliações).
+  
+  ```bash
+  docker search --filter=stars=100 mysql
+  ```
+
+- `--filter=is-official=true`: Mostra apenas imagens oficiais.
+
+  ```bash
+  docker search --filter=is-official=true mysql
+  ```
+
+Esses filtros ajudam a encontrar imagens confiáveis e amplamente usadas.
+
 ### Dependências Externas
 
 ```bash
