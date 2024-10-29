@@ -289,6 +289,36 @@ docker rmi $(docker images -q)
 
 Isso irá limpar todas as imagens, liberando espaço em disco.
 
+O comando `docker logs -f` é usado para visualizar os logs de um container em tempo real. O `-f` (ou `--follow`) permite acompanhar o fluxo contínuo dos logs, similar ao comando `tail -f`.
+
+### Exemplo de Uso
+
+```bash
+docker logs -f nome-do-container
+```
+
+ou, se preferir, usando o ID do container:
+
+```bash
+docker logs -f id-do-container
+```
+
+### Opções Úteis
+
+- **`--tail [N]`**: Limita o número de linhas exibidas a partir do final dos logs. Por exemplo, para mostrar apenas as últimas 50 linhas:
+
+  ```bash
+  docker logs -f --tail 50 nome-do-container
+  ```
+
+- **`--since [tempo]`**: Mostra logs a partir de um determinado tempo. Você pode especificar em minutos, horas, etc. Exemplo:
+
+  ```bash
+  docker logs -f --since 1h nome-do-container
+  ```
+
+Esse comando é muito útil para monitorar aplicações e debugar problemas em containers em execução.
+
 ### Dependências Externas
 
 ```bash
