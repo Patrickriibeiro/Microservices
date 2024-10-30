@@ -234,3 +234,68 @@ Este Dockerfile requer acesso à internet para baixar dependências durante o bu
 
 ### Observação 
 arquivo Dockerfile deve sempre começar com letra maiúscula. Além disso, todos os arquivos e subdiretórios presentes no mesmo diretório do Dockerfile serão incluídos na construção da imagem Docker. Certifique-se de que apenas os arquivos necessários para a aplicação estejam neste diretório para evitar incluir arquivos desnecessários na imagem final.
+
+
+Parece que sua distribuição Ubuntu está rodando no **WSL 1**, enquanto o Docker Desktop está configurado para o **WSL 2**. Para usar o Docker de forma mais eficiente com o Ubuntu no WSL, você precisará atualizar o Ubuntu para o WSL 2. 
+
+Aqui está como fazer isso:
+
+### Passo 1: Converter o Ubuntu para WSL 2
+
+No **PowerShell**, execute o seguinte comando para definir a versão do WSL para a distribuição Ubuntu:
+
+```powershell
+wsl --set-version Ubuntu 2
+```
+
+Isso irá converter a sua distribuição Ubuntu para WSL 2. Esse processo pode demorar um pouco, dependendo do tamanho da instalação.
+
+### Passo 2: Verifique a Conversão
+
+Após o término da conversão, você pode verificar se o Ubuntu está no WSL 2 com o comando:
+
+```powershell
+wsl -l -v
+```
+
+A saída deverá mostrar `VERSION 2` ao lado do Ubuntu.
+
+### Passo 3: Ative a Integração WSL no Docker Desktop
+
+1. Abra o **Docker Desktop**.
+2. Vá para **Settings** > **Resources** > **WSL Integration**.
+3. Ative a opção de integração com o Ubuntu (ou a opção **Enable integration with my default WSL distro**).
+
+Após esses passos, o Ubuntu estará configurado para o WSL 2 e integrado com o Docker Desktop, permitindo que você utilize o Docker e o Docker Compose com a distribuição Ubuntu no WSL.
+
+
+
+Agora que o Ubuntu está configurado para o WSL 2, você está pronto para integrá-lo ao Docker Desktop. Vamos garantir que tudo está funcionando corretamente:
+
+### Passo 1: Inicie o WSL e o Ubuntu
+
+Abra o **Ubuntu** novamente, seja pelo menu Iniciar ou executando o comando no PowerShell:
+
+```powershell
+wsl -d Ubuntu
+```
+
+Isso deve iniciar o Ubuntu com o WSL 2.
+
+### Passo 2: Verifique a Integração com o Docker Desktop
+
+1. Abra o **Docker Desktop**.
+2. Vá até **Settings** > **Resources** > **WSL Integration**.
+3. Certifique-se de que a opção **Enable integration with my default WSL distro** está marcada ou que **Ubuntu** está especificamente selecionado para a integração.
+4. Clique em **Apply & Restart** se precisar salvar essas alterações.
+
+### Passo 3: Teste o Docker no Ubuntu
+
+Agora, no terminal do Ubuntu, verifique se o Docker está funcionando corretamente executando:
+
+```bash
+docker --version
+docker-compose --version
+```
+
+Se ambos os comandos retornarem a versão do Docker, você está pronto para usar o Docker e o Docker Compose no Ubuntu com WSL 2!
