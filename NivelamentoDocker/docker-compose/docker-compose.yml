@@ -3,6 +3,7 @@ services:
    db:
       image: mysql:5.7.22
       command: mysqld --default_authentication_plugin=mysql_native_password
+      restart: always
       environment: 
          TZ: America/Sao_Paulo
          MYSQL_ROOT_PASSWORD: docker
@@ -24,6 +25,7 @@ services:
          WORDPRESS_DB_NAME: wordpress
          WORDPRESS_DB_USER: root
          WORDPRESS_DB_PASSWORD: docker
+      restart: always
       ports:
          - 80:80
       depends_on:
