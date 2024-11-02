@@ -362,3 +362,32 @@ O comando `docker container ls` é usado para listar apenas os contêineres que 
    ```
 
 Esse comando mostra detalhes como o ID do contêiner, a imagem, o comando em execução, status, portas e nome do contêiner.
+
+O `vim` é um editor de texto no terminal que você pode usar para editar o arquivo `docker-compose.yml`. Siga os passos abaixo para abrir e editar o arquivo:
+
+1. **Abra o arquivo** no `vim` com o comando:
+   ```bash
+   vim docker-compose.yml
+   ```
+
+2. **Navegue e edite**:
+   - O `vim` inicia no modo de navegação. Para começar a editar, pressione **`i`** para entrar no modo de inserção.
+   - Faça as edições necessárias no arquivo `docker-compose.yml`.
+
+3. **Salvar e sair**:
+   - Quando terminar de editar, pressione **`Esc`** para sair do modo de inserção.
+   - Digite **`:wq`** (significa *write* e *quit*) e pressione **Enter** para salvar e sair do `vim`.
+
+4. **Sair sem salvar**:
+   - Para sair sem salvar as alterações, pressione **`Esc`**, digite **`:q!`** e pressione **Enter**.
+
+Com isso, você poderá criar ou modificar seu arquivo `docker-compose.yml` usando o `vim`.
+
+O comando correto para **salvar e sair** no `vim` é **`:wq`** e não `:qw`. O comando `:wq` significa *write* (salvar) e *quit* (sair). 
+
+Aqui estão os passos novamente para salvar e sair no `vim`:
+
+1. Pressione **`Esc`** para garantir que você esteja no modo de comando.
+2. Digite **`:wq`** e pressione **Enter**.
+
+Se você quiser apenas **sair sem salvar**, use **`:q!`** e pressione **Enter**.
