@@ -299,3 +299,23 @@ docker-compose --version
 ```
 
 Se ambos os comandos retornarem a versão do Docker, você está pronto para usar o Docker e o Docker Compose no Ubuntu com WSL 2!
+
+Aqui estão as funções dos comandos `docker compose up -d` e `docker-compose down`:
+
+1. **`docker compose up -d`**:
+   - Esse comando inicia todos os contêineres definidos no arquivo `docker-compose.yml` no modo **desanexado** (`-d`), o que significa que eles vão rodar em segundo plano.
+   - Esse comando é usado para **subir** os serviços e mantê-los rodando, permitindo que você continue usando o terminal.
+   - Exemplo de uso:
+     ```bash
+     docker compose up -d
+     ```
+
+2. **`docker-compose down`**:
+   - Esse comando encerra e **remove todos os contêineres, redes e volumes** criados pelo `docker-compose.yml`.
+   - É usado quando você quer **parar** e **limpar** tudo que foi criado pelo `docker-compose`.
+   - Exemplo de uso:
+     ```bash
+     docker-compose down
+     ```
+
+Esses comandos são fundamentais para gerenciar contêineres Docker usando o Docker Compose!
