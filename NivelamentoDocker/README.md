@@ -391,3 +391,18 @@ Aqui estão os passos novamente para salvar e sair no `vim`:
 2. Digite **`:wq`** e pressione **Enter**.
 
 Se você quiser apenas **sair sem salvar**, use **`:q!`** e pressione **Enter**.
+
+O comando `docker-compose ps` exibe o status dos contêineres gerenciados pelo `docker-compose`. Ele mostra uma tabela com informações úteis sobre os contêineres em execução, como:
+
+- **Name**: Nome do contêiner.
+- **Command**: O comando que o contêiner está executando.
+- **State**: Estado do contêiner (por exemplo, `Up` para em execução ou `Exited` para parado).
+- **Ports**: Portas mapeadas para o contêiner.
+
+### Exemplo de Uso
+
+```bash
+docker-compose ps
+```
+
+Esse comando é útil para verificar rapidamente o status dos contêineres definidos no seu arquivo `docker-compose.yml`.
