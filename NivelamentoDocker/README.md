@@ -319,3 +319,46 @@ Aqui estão as funções dos comandos `docker compose up -d` e `docker-compose d
      ```
 
 Esses comandos são fundamentais para gerenciar contêineres Docker usando o Docker Compose!
+
+
+O comando `docker ps -a` é usado para listar todos os contêineres Docker no sistema, incluindo aqueles que estão parados.
+
+### Detalhes do Comando
+
+```bash
+docker ps -a
+```
+
+Esse comando exibe informações detalhadas, como:
+
+- **Container ID**: ID do contêiner.
+- **Image**: A imagem Docker da qual o contêiner foi criado.
+- **Command**: O comando que está sendo executado pelo contêiner.
+- **Created**: Quando o contêiner foi criado.
+- **Status**: Mostra se o contêiner está em execução, parado ou em outro estado.
+- **Ports**: Portas mapeadas do contêiner.
+- **Names**: Nome do contêiner.
+
+Se você quiser ver apenas os contêineres em execução, pode usar:
+
+```bash
+docker ps
+```
+
+
+O comando `docker container ls` é usado para listar apenas os contêineres que estão **em execução** no Docker. Esse comando é equivalente a `docker ps`.
+
+### Exemplos de Uso
+
+1. **Listar contêineres em execução:**
+   ```bash
+   docker container ls
+   ```
+
+2. **Listar todos os contêineres (em execução e parados):**
+   Para ver todos os contêineres, incluindo os que estão parados, adicione a flag `-a`:
+   ```bash
+   docker container ls -a
+   ```
+
+Esse comando mostra detalhes como o ID do contêiner, a imagem, o comando em execução, status, portas e nome do contêiner.
