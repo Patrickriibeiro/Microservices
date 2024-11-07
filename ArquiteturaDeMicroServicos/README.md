@@ -95,55 +95,57 @@ O Spring Cloud Gateway fornece uma solução moderna de roteamento API baseada e
 Essas ferramentas são essenciais para construir sistemas resilientes e estáveis. O padrão Circuit Breaker ajuda a gerenciar falhas e controlar a taxa de solicitações, evitando sobrecarga em serviços que estão enfrentando problemas. O Resilience4j é uma biblioteca leve que oferece suporte para a implementação desse padrão e outros, como fallback e bulkhead.
 
 ### Visão Geral do Zipkin
-O Zipkin coleta e armazena traces (rastros) das requisições que passam por diversos serviços em um sistema distribuído, permitindo visualizar como cada serviço interage e identificando gargalos ou falhas.
+O Zipkin é uma ferramenta de *Distributed Tracing* que ajuda a monitorar o fluxo de solicitações entre diferentes serviços em um sistema distribuído. Vou detalhar o funcionamento e como documentar isso no seu projeto.
 
-Trace e Span:
+O Zipkin coleta e armazena *traces* (rastros) das requisições que passam por diversos serviços em um sistema distribuído, permitindo visualizar como cada serviço interage e identificando gargalos ou falhas.
 
-Trace: Representa o ciclo de vida completo de uma requisição, desde o início até a conclusão.
-Span: Cada trace é composto de um ou mais spans, que representam um bloco individual de trabalho dentro do trace. Por exemplo, cada chamada a um serviço ou banco de dados pode ser um span.
-Agente de Coleta:
+1. **Trace e Span**:
+   - **Trace**: Representa o ciclo de vida completo de uma requisição, desde o início até a conclusão.
+   - **Span**: Cada *trace* é composto de um ou mais *spans*, que representam um bloco individual de trabalho dentro do *trace*. Por exemplo, cada chamada a um serviço ou banco de dados pode ser um *span*.
 
-Em cada serviço, um agente ou biblioteca de tracing (como spring-cloud-sleuth para Spring Boot) coleta informações sobre as requisições e as envia ao Zipkin.
-Cada serviço precisa gerar e propagar o ID do trace e dos spans para manter o encadeamento correto entre os serviços.
-Armazenamento:
+2. **Agente de Coleta**:
+   - Em cada serviço, um agente ou biblioteca de *tracing* (como `spring-cloud-sleuth` para Spring Boot) coleta informações sobre as requisições e as envia ao Zipkin.
+   - Cada serviço precisa gerar e propagar o ID do *trace* e dos *spans* para manter o encadeamento correto entre os serviços.
 
-O Zipkin armazena os dados em um banco de dados, como MySQL, Cassandra, ou Elasticsearch, onde os traces e spans ficam disponíveis para consulta.
-Interface de Visualização:
+3. **Armazenamento**:
+   - O Zipkin armazena os dados em um banco de dados, como MySQL, Cassandra, ou Elasticsearch, onde os *traces* e *spans* ficam disponíveis para consulta.
 
-A interface gráfica do Zipkin exibe os traces, permitindo inspecionar cada span, ver o tempo que cada serviço levou para processar e identificar atrasos ou falhas.
-Integração com o Spring Boot:
+4. **Interface de Visualização**:
+   - A interface gráfica do Zipkin exibe os *traces*, permitindo inspecionar cada *span*, ver o tempo que cada serviço levou para processar e identificar atrasos ou falhas.
 
-Em aplicações Spring Boot, a biblioteca spring-cloud-sleuth integra com o Zipkin para criar e propagar automaticamente os spans e traces.
-A configuração do Zipkin geralmente envolve a definição do URL do servidor Zipkin para onde as informações de tracing devem ser enviadas.
-Documentação do Setup
+5. **Integração com o Spring Boot**:
+   - Em aplicações Spring Boot, a biblioteca `spring-cloud-sleuth` integra com o Zipkin para criar e propagar automaticamente os *spans* e *traces*.
+   - A configuração do Zipkin geralmente envolve a definição do URL do servidor Zipkin para onde as informações de *tracing* devem ser enviadas.
+
+### Documentação do Setup
+
 Para documentar a implementação do Zipkin, você pode seguir este exemplo:
 
-Dependências:
+1. **Dependências**:
+   ```java
+   dependencies {
+       implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
+       implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
+   }
+   ```
 
-java
-Copiar código
-dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-starter-sleuth'
-    implementation 'org.springframework.cloud:spring-cloud-starter-zipkin'
-}
-Configuração:
+2. **Configuração**:
+   ```yaml
+   spring:
+     zipkin:
+       base-url: http://localhost:9411 # URL do servidor Zipkin
+     sleuth:
+       sampler:
+         probability: 1.0 # Configuração para coletar todas as requisições (para produção, ajustar)
+   ```
 
-yaml
-Copiar código
-spring:
-  zipkin:
-    base-url: http://localhost:9411 # URL do servidor Zipkin
-  sleuth:
-    sampler:
-      probability: 1.0 # Configuração para coletar todas as requisições (para produção, ajustar)
-Inicialização do Zipkin:
+3. **Inicialização do Zipkin**:
+   - Instale o Zipkin e inicie o servidor (`docker run -d -p 9411:9411 openzipkin/zipkin`) ou configure um servidor próprio.
 
-Instale o Zipkin e inicie o servidor (docker run -d -p 9411:9411 openzipkin/zipkin) ou configure um servidor próprio.
-Visualização de Traces:
+4. **Visualização de Traces**:
+   - Acesse `http://localhost:9411` para visualizar os *traces* e investigar o comportamento dos serviços.
 
-Acesse http://localhost:9411 para visualizar os traces e investigar o comportamento dos serviços.
 Esse setup ajuda a rastrear e entender o fluxo de dados, ajudando na identificação de gargalos e facilitando a manutenção de sistemas distribuídos.
-
 
 ### Configuração da Porta da Aplicação
 
