@@ -147,6 +147,82 @@ Para documentar a implementação do Zipkin, você pode seguir este exemplo:
 
 Esse setup ajuda a rastrear e entender o fluxo de dados, ajudando na identificação de gargalos e facilitando a manutenção de sistemas distribuídos.
 
+
+### Migração do Spring Cloud Sleuth para o Micrometer Tracing
+
+Com as novas versões do Spring Boot (3.x) e Spring Cloud, a equipe de desenvolvimento descontinuou o Spring Cloud Sleuth. Agora, a recomendação é utilizar o **Micrometer Tracing** com **OpenTelemetry** para realizar o Distributed Tracing. Essa mudança acompanha a evolução da observabilidade na plataforma Spring, adotando uma solução mais moderna e amplamente suportada.
+
+### Motivo da Migração
+
+- **Compatibilidade**: Spring Cloud Sleuth não é mais compatível com as versões recentes do Spring Boot e Spring Cloud.
+- **Padronização**: OpenTelemetry é um padrão amplamente aceito para Distributed Tracing, o que facilita a integração com diversas ferramentas e plataformas de monitoramento.
+- **Funcionalidade Aprimorada**: O Micrometer Tracing, integrado com OpenTelemetry, oferece uma implementação mais robusta e flexível para observabilidade.
+
+### Passo a Passo da Migração
+
+1. **Remova o Spring Cloud Sleuth**: Primeiramente, remova qualquer dependência do Sleuth do seu projeto, como:
+
+   ```xml
+   <dependency>
+       <groupId>org.springframework.cloud</groupId>
+       <artifactId>spring-cloud-starter-sleuth</artifactId>
+   </dependency>
+   ```
+
+2. **Adicione Dependências do Micrometer Tracing e OpenTelemetry**:
+
+   No `pom.xml`, adicione as dependências para o Micrometer Tracing com suporte ao OpenTelemetry e o exportador para Zipkin:
+
+   ```xml
+   <dependency>
+       <groupId>io.micrometer</groupId>
+       <artifactId>micrometer-tracing-bridge-otel</artifactId>
+       <version>1.3.5</version> <!-- versão recomendada para Spring Boot 3.3.1 -->
+   </dependency>
+
+   <dependency>
+       <groupId>io.opentelemetry</groupId>
+       <artifactId>opentelemetry-exporter-zipkin</artifactId>
+       <version>1.30.0</version>
+   </dependency>
+   ```
+
+3. **Configuração de Amostragem (Sampling)**:
+
+   Para definir a probabilidade de amostragem, configure seu arquivo `application.yml` (ou `application.properties`) assim:
+
+   ```yaml
+   management:
+     tracing:
+       sampling:
+         probability: 0.05  # 5% das requisições serão amostradas
+   ```
+
+4. **Configuração do Endpoint Zipkin**:
+
+   Configure o endpoint do Zipkin para enviar os dados de tracing:
+
+   ```yaml
+   management:
+     tracing:
+       zipkin:
+         base-url: http://localhost:9411/api/v2/spans
+   ```
+
+   Se o Zipkin estiver rodando em uma máquina ou porta diferente, ajuste o `base-url` conforme necessário.
+
+5. **Verifique a Execução e o Monitoramento**:
+
+   - Com as dependências e configurações no lugar, inicialize a aplicação.
+   - Acesse o painel do Zipkin em `http://localhost:9411` para verificar se as informações de tracing estão sendo enviadas e recebidas corretamente.
+   - Teste diferentes endpoints da sua aplicação e verifique no painel do Zipkin para confirmar que os traces estão sendo capturados.
+
+### Recursos Adicionais
+
+- **Guia de Migração do Sleuth para Micrometer Tracing**: [Micrometer Tracing Migration Guide](https://github.com/micrometer-metrics/tracing/wiki/Spring-Cloud-Sleuth-3.1-Migration-Guide)
+- **Documentação do Micrometer Tracing**: [Micrometer Tracing Documentation](https://micrometer.io/docs/tracing)
+
+
 ### Configuração da Porta da Aplicação
 
 Para alterar a porta da aplicação, use o argumento de VM:
