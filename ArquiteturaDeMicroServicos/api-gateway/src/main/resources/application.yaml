@@ -39,6 +39,10 @@ springdoc:
         url: /v3/api-docs/book-service
       - name: cambio-service
         url: /v3/api-docs/cambio-service
+management:
+  tracing:
+    sampling:
+      probability: 1.0
           
 
     

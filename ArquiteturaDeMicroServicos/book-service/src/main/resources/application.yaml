@@ -42,7 +42,11 @@ spring:
     schemas:  book_service
     user: root
     password: admin123
-    locations: classpath:db/migration
+    locations: classpath:db/migration	
+management:
+  tracing:
+    sampling:
+      probability: 1.0			 
 #springdoc:
 #  api-docs:
 #    path: book-service/v3/api-docs
