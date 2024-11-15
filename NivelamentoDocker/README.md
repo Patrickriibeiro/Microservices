@@ -410,37 +410,39 @@ Esse comando é útil para verificar rapidamente o status dos contêineres defin
 
 
 ### Passos para Construir Imagem Docker no Eclipse
-Certifique-se de que o Docker está rodando:
 
-Antes de iniciar o processo no Eclipse, verifique se o Docker Desktop está ativo e funcionando corretamente em seu sistema.
-Configuração do Projeto no Eclipse:
+1. **Certifique-se de que o Docker está rodando:**
+   - Antes de iniciar o processo no Eclipse, verifique se o Docker Desktop está ativo e funcionando corretamente em seu sistema.
 
-Abra o projeto no Eclipse onde você tem o arquivo pom.xml configurado para usar o Spring Boot Maven Plugin.
-Configurando o Maven Build:
+2. **Configuração do Projeto no Eclipse:**
+   - Abra o projeto no Eclipse onde você tem o arquivo `pom.xml` configurado para usar o Spring Boot Maven Plugin.
 
-Clique com o botão direito do mouse sobre o projeto no Eclipse.
-Vá em 'Run As' -> 'Maven build...'.
-Na janela que se abre, você precisará configurar o build.
-Definição dos Goals do Maven:
+3. **Configurando o Maven Build:**
+   - Clique com o botão direito do mouse sobre o projeto no Eclipse.
+   - Vá em 'Run As' -> 'Maven build...'.
+   - Na janela que se abre, você precisará configurar o build.
 
-No campo 'Goals', insira: spring-boot:build-image -DskipTests.
-Essa configuração irá instruir o Maven a construir a imagem Docker do seu projeto e pular a execução dos testes.
-Configurações Adicionais (opcional):
+4. **Definição dos Goals do Maven:**
+   - No campo 'Goals', insira: `spring-boot:build-image -DskipTests`.
+   - Essa configuração irá instruir o Maven a construir a imagem Docker do seu projeto e pular a execução dos testes.
 
-Se você tiver configurações específicas de perfil ou outras propriedades, pode adicioná-las na seção 'Parameters' do build.
-Por exemplo, para definir uma propriedade, você usaria -Dpropriedade=valor.
-Executar o Build:
+5. **Configurações Adicionais (opcional):**
+   - Se você tiver configurações específicas de perfil ou outras propriedades, pode adicioná-las na seção 'Parameters' do build.
+   - Por exemplo, para definir uma propriedade, você usaria `-Dpropriedade=valor`.
 
-Clique em 'Run' para iniciar o processo de build.
-O Eclipse irá executar o Maven com os goals especificados e você poderá acompanhar o progresso na aba 'Console'.
-Observações Importantes
-Monitoramento de Erros:
+6. **Executar o Build:**
+   - Clique em 'Run' para iniciar o processo de build.
+   - O Eclipse irá executar o Maven com os goals especificados e você poderá acompanhar o progresso na aba 'Console'.
 
-Preste atenção ao console do Eclipse para qualquer mensagem de erro durante o build. Se ocorrerem erros, eles ajudarão a diagnosticar o problema.
-Configuração do Docker:
+### Observações Importantes
 
-Certifique-se de que as configurações de rede e permissões do Docker estão corretas, especialmente se estiver usando Docker no Windows com protocolos específicos como npipe.
-Verificação da Imagem:
+- **Monitoramento de Erros:**
+  - Preste atenção ao console do Eclipse para qualquer mensagem de erro durante o build. Se ocorrerem erros, eles ajudarão a diagnosticar o problema.
 
-Após a construção ser bem-sucedida, você pode verificar a imagem gerada usando comandos do Docker como docker images para ver se sua nova imagem está listada.
+- **Configuração do Docker:**
+  - Certifique-se de que as configurações de rede e permissões do Docker estão corretas, especialmente se estiver usando Docker no Windows com protocolos específicos como `npipe`.
+
+- **Verificação da Imagem:**
+  - Após a construção ser bem-sucedida, você pode verificar a imagem gerada usando comandos do Docker como `docker images` para ver se sua nova imagem está listada.
+
 Seguindo esses passos, você deve ser capaz de construir uma imagem Docker para seu projeto Spring Boot diretamente do Eclipse, facilitando o processo de desenvolvimento e deploy.
