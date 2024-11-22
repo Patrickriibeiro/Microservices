@@ -1,0 +1,27 @@
+services:
+  naming-server:
+    image: patrickro24/naming-server:0.0.1-SNAPSHOT
+    ports:
+      - 8761:8761
+    networks:
+      - patrick-network  
+  api-gateway:
+    image: patrickro24/api-gateway:0.0.1-SNAPSHOP
+    ports:
+      - 8765:8765
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASE.URL: http://zipkin-server:9411/    
+    networks:
+      - patrick-network   
+  zipkin-server:
+    image: openzipkin/zipkin:latest
+    ports:
+      - 9411:9411
+    networks:
+      - patrick-network     
+networks: 
+  patrick-network:
+    driver: bridge  
