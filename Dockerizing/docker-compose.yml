@@ -21,7 +21,33 @@ services:
     ports:
       - 9411:9411
     networks:
-      - patrick-network     
+      - patrick-network   
+  cambio-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: ptk123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: ptk123
+      MYSQL_DATABASE: cambio_service
+    ports:
+      - 3308:3306  # Mapear porta externa (host) para a porta padrão interna do MySQL
+    networks:
+      - patrick-network
+  book-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: ptk123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: ptk123
+      MYSQL_DATABASE: book_service
+    ports:
+      - 3310:3306  # Mapear porta externa (host) para a porta padrão interna do MySQL
+    networks:
+      - patrick-network  
 networks: 
   patrick-network:
     driver: bridge  
