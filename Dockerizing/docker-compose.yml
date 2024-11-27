@@ -15,7 +15,32 @@ services:
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
       SPRING.ZIPKIN.BASE.URL: http://zipkin-server:9411/    
     networks:
-      - patrick-network   
+      - patrick-network
+  cambio-service:
+    image: patrickro24/cambio-service
+    restart: always
+    build:
+      context: .
+      dockerfile: cambio-service/Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      SPRING.ZIPKIN.BASE.URL: http://zipkin-server:9411/ 
+      SPRING.APPLICATION.NAME: cambio_service
+      SPRING.DATASOURCE.URL: jdbc:mysql://localhost:3306/cambio_service?useTimezone=true&serverTimezone=UTC
+      SPRING.DATASOURCE.USERNAME: root
+      SPRING.DATASOURCE.PASSWORD: admin123
+      SPRING.FLYWAY.URL: jdbc:mysql://localhost:3306/cambio_service?useTimezone=true&serverTimezone=UTC
+      SPRING.FLYWAY.USER: root
+      SPRING.FLYWAY.PASSWORD: admin123
+      SPRING.FLYWAY.LOCATIONS: classpath:db/migration 
+    ports:
+      - 8000:8000
+    depends_on:
+      - naming-server
+      - cambio-db
+    networks:
+      - patrick-network    
   zipkin-server:
     image: openzipkin/zipkin:latest
     ports:

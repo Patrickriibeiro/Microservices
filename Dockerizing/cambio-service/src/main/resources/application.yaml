@@ -18,8 +18,7 @@ spring:
       ddl-auto: update
     show-sql: false
   flyway:
-    url: jdbc:mysql://localhost:3306/
-    schemas:  cambio_service
+    url: jdbc:mysql://localhost:3306/cambio_service?useTimezone=true&serverTimezone=UTC
     user: root
     password: admin123
     locations: classpath:db/migration

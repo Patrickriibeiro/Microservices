@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.1</version>
+		<version>3.3.6</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.patrickriibeiro</groupId>
@@ -125,9 +125,13 @@
 	<build>
 		<plugins>
 			<plugin>
-				<groupId>
-					org.springframework.boot</groupId>
+				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>patrickro24/${project.artifactId}:${project.version}</name>
+					</image>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
