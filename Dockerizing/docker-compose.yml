@@ -17,30 +17,26 @@ services:
     networks:
       - patrick-network
   cambio-service:
-    image: patrickro24/cambio-service
+    image: patrickro24/cambio-service:0.0.1-SNAPSHOT
     restart: always
-    build:
-      context: .
-      dockerfile: cambio-service/Dockerfile
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
-      SPRING.ZIPKIN.BASE.URL: http://zipkin-server:9411/ 
-      SPRING.APPLICATION.NAME: cambio_service
-      SPRING.DATASOURCE.URL: jdbc:mysql://localhost:3306/cambio_service?useTimezone=true&serverTimezone=UTC
+      SPRING.ZIPKIN.BASE.URL: http://zipkin-server:9411/
+      SPRING.DATASOURCE.URL: jdbc:mysql://cambio-db:3308/cambio_service?useSSL=false&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
       SPRING.DATASOURCE.USERNAME: root
       SPRING.DATASOURCE.PASSWORD: admin123
-      SPRING.FLYWAY.URL: jdbc:mysql://localhost:3306/cambio_service?useTimezone=true&serverTimezone=UTC
+      SPRING.FLYWAY.URL: jdbc:mysql://cambio-db:3308/cambio_service?useSSL=false&useTimezone=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2
       SPRING.FLYWAY.USER: root
       SPRING.FLYWAY.PASSWORD: admin123
-      SPRING.FLYWAY.LOCATIONS: classpath:db/migration 
+      SPRING.FLYWAY.LOCATIONS: classpath:db/migration
     ports:
       - 8000:8000
     depends_on:
       - naming-server
       - cambio-db
     networks:
-      - patrick-network    
+      - patrick-network
   zipkin-server:
     image: openzipkin/zipkin:latest
     ports:
@@ -48,27 +44,31 @@ services:
     networks:
       - patrick-network   
   cambio-db:
-    image: mysql:latest
+    image: mysql:8.0.28
+    command: mysqld --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       TZ: America/Sao_Paulo
-      MYSQL_ROOT_PASSWORD: ptk123
+      MYSQL_ROOT_PASSWORD: admin123
       MYSQL_USER: docker
-      MYSQL_PASSWORD: ptk123
+      MYSQL_PASSWORD: admin123
       MYSQL_DATABASE: cambio_service
+      MYSQL_TCP_PORT: 3308
     ports:
       - 3308:3306  # Mapear porta externa (host) para a porta padrão interna do MySQL
     networks:
       - patrick-network
   book-db:
-    image: mysql:latest
+    image: mysql:8.0.28
+    command: mysqld --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
       TZ: America/Sao_Paulo
-      MYSQL_ROOT_PASSWORD: ptk123
+      MYSQL_ROOT_PASSWORD: admin123
       MYSQL_USER: docker
-      MYSQL_PASSWORD: ptk123
+      MYSQL_PASSWORD: admin123
       MYSQL_DATABASE: book_service
+      MYSQL_TCP_PORT: 3310
     ports:
       - 3310:3306  # Mapear porta externa (host) para a porta padrão interna do MySQL
     networks:
