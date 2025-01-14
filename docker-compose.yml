@@ -1,0 +1,146 @@
+services:
+      
+  zipkin-server:
+    image: openzipkin/zipkin:latest
+    ports:
+      - 9411:9411
+    restart: always  
+    depends_on:
+      - rabbit-mq
+    environment:
+      RABBIT_URI: amqp://guest:guest@rabbit-mq:5672      
+    networks:
+      - patrick-network
+      
+  rabbit-mq:
+    image: rabbitmq:3.8.14-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - patrick-network   
+          
+  cambio-db:
+    image: mysql:8.0.28
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: cambio_service
+    ports:
+      - 3308:3306  # Mapear porta externa (host) para a porta padrão interna do MySQL  
+    networks:
+      - patrick-network
+      
+  book-db:
+    image: mysql:8.0.28
+    restart: always
+    environment:
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: book_service
+    ports:
+      - 3310:3306  # Mapear porta externa (host) para a porta padrão interna do MySQL  
+    networks:
+      - patrick-network
+
+  naming-server:
+    image: patrickro24/naming-server
+    restart: always
+    build:
+      context: .
+      dockerfile: naming-server/Dockerfile
+    ports:
+      - 8761:8761
+    networks:
+      - patrick-network 
+      
+  api-gateway:
+    image: patrickro24/api-gateway
+    restart: always
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    ports:
+      - 8765:8765
+    depends_on:
+      - naming-server
+      - rabbit-mq
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT:  http://zipkin-server:9411/api/v2/spans
+      MANAGEMENT_TRACING_SAMPLING_PROBABILITY: 1.0 
+      RABBIT_URI: amqp://guest:guest@rabbit-mq:5672  
+      SPRING_RABBITMQ_HOST: rabbit-mq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+    networks:
+      - patrick-network
+      
+  cambio-service:
+    image: patrickro24/cambio-service
+    restart: always
+    build:
+      context: .
+      dockerfile: cambio-service/Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT:  http://zipkin-server:9411/api/v2/spans
+      MANAGEMENT_TRACING_SAMPLING_PROBABILITY: 1.0
+      RABBIT_URI: amqp://guest:guest@rabbit-mq:5672  
+      SPRING_RABBITMQ_HOST: rabbit-mq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+      SPRING.DATASOURCE.URL: jdbc:mysql://cambio-db:3306/cambio_service?useSSL=false&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2&allowPublicKeyRetrieval=true
+      SPRING.DATASOURCE.USERNAME: docker
+      SPRING.DATASOURCE.PASSWORD: admin123
+      SPRING.FLYWAY.URL: jdbc:mysql://cambio-db:3306/cambio_service?useSSL=false&useTimezone=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2&allowPublicKeyRetrieval=true
+      SPRING.FLYWAY.USER: docker
+      SPRING.FLYWAY.PASSWORD: admin123
+      SPRING.FLYWAY.LOCATIONS: classpath:db/migration
+    ports:
+      - 8000:8000
+    depends_on:
+      - rabbit-mq
+      - naming-server
+      - cambio-db
+    networks:
+      - patrick-network
+            
+  book-service:
+    image: patrickro24/book-service
+    restart: always
+    build:
+      context: .
+      dockerfile: book-service/Dockerfile
+    environment:
+      TZ: America/Sao_Paulo
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+      MANAGEMENT.ZIPKIN.TRACING.ENDPOINT:  http://zipkin-server:9411/api/v2/spans
+      MANAGEMENT_TRACING_SAMPLING_PROBABILITY: 1.0
+      RABBIT_URI: amqp://guest:guest@rabbit-mq:5672  
+      SPRING_RABBITMQ_HOST: rabbit-mq
+      SPRING_ZIPKIN_SENDER_TYPE: rabbit
+      SPRING.DATASOURCE.URL: jdbc:mysql://book-db:3306/book_service?useSSL=false&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2&allowPublicKeyRetrieval=true
+      SPRING.DATASOURCE.USERNAME: docker
+      SPRING.DATASOURCE.PASSWORD: admin123
+      SPRING.FLYWAY.URL: jdbc:mysql://book-db:3306/book_service?useSSL=false&useTimezone=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2&allowPublicKeyRetrieval=true
+      SPRING.FLYWAY.USER: docker
+      SPRING.FLYWAY.PASSWORD: admin123
+      SPRING.FLYWAY.LOCATIONS: classpath:db/migration
+    ports:
+      - 8100:8100
+    depends_on:
+      - rabbit-mq
+      - naming-server
+      - cambio-db
+    networks:
+      - patrick-network  
+
+networks: 
+  patrick-network:
+    driver: bridge           
+  
