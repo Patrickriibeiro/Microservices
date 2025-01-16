@@ -1,5 +1,7 @@
 ## Microservices com Spring Boot
 
+[![Continuous Integration with Github](https://github.com/Patrickriibeiro/Microservices/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Patrickriibeiro/Microservices/actions/workflows/docker-publish.yml)
+
 Este projeto de estudo explora a implementação de microserviços utilizando várias tecnologias e ferramentas do ecossistema Spring e outras integrações. O foco é criar uma arquitetura resiliente, escalável e fácil de gerenciar, adequada para atender às demandas de sistemas modernos.
 
 ### Tecnologias Utilizadas
