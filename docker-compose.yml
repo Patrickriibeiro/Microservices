@@ -49,22 +49,22 @@ services:
       - patrick-network
 
   naming-server:
-    image: patrickro24/naming-server
+    image: patrickro24/naming-server:latest
     restart: always
-    build:
-      context: .
-      dockerfile: naming-server/Dockerfile
+#    build:
+#      context: .
+#      dockerfile: naming-server/Dockerfile
     ports:
       - 8761:8761
     networks:
       - patrick-network 
       
   api-gateway:
-    image: patrickro24/api-gateway
+    image: patrickro24/api-gateway:latest
     restart: always
-    build:
-      context: .
-      dockerfile: api-gateway/Dockerfile
+#    build:
+#      context: .
+#      dockerfile: api-gateway/Dockerfile
     ports:
       - 8765:8765
     depends_on:
@@ -81,11 +81,11 @@ services:
       - patrick-network
       
   cambio-service:
-    image: patrickro24/cambio-service
+    image: patrickro24/cambio-service:latest
     restart: always
-    build:
-      context: .
-      dockerfile: cambio-service/Dockerfile
+#    build:
+#      context: .
+#      dockerfile: cambio-service/Dockerfile
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
@@ -111,11 +111,11 @@ services:
       - patrick-network
             
   book-service:
-    image: patrickro24/book-service
+    image: patrickro24/book-service:latest
     restart: always
-    build:
-      context: .
-      dockerfile: book-service/Dockerfile
+#    build:
+#      context: .
+#      dockerfile: book-service/Dockerfile
     environment:
       TZ: America/Sao_Paulo
       EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
